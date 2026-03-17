@@ -1,0 +1,137 @@
+name: 📋 Запропонувати новий тікет
+description: Запропонуй новий тікет для імпорту в Jira. Не потрібно знати формат TSV — просто заповни поля нижче.
+title: "[TICKET] "
+labels: ["needs-review"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Дякуємо за внесок! 🙌
+        Заповни поля нижче — ми самі конвертуємо це у потрібний формат для Jira.
+        Чим детальніше заповниш, тим швидше тікет потрапить у систему.
+
+  # ── ОСНОВНЕ ──────────────────────────────────────────────
+
+  - type: input
+    id: summary
+    attributes:
+      label: 📌 Назва тікету (Summary)
+      description: >
+        Коротко і конкретно — що саме сталося або що потрібно зробити.
+        Не «Проблема з ДБР», а «ДБР не відкрило розслідування щодо витоку фото Шабуніна».
+      placeholder: "Наприклад: НАБУ зафіксувало стеження за авто детектива без санкції суду"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: work_type
+    attributes:
+      label: 🏷️ Тип тікету
+      description: Epic — велика тема. Story — конкретна подія або завдання.
+      options:
+        - Story
+        - Epic
+        - Task
+    validations:
+      required: true
+
+  - type: input
+    id: parent_epic
+    attributes:
+      label: 🔗 До якого Epic належить?
+      description: >
+        Напиши назву існуючого Epic або запропонуй нову тему.
+        Актуальний список Epic — у файлі [tickets/README.md](../../tickets/README.md).
+      placeholder: "Наприклад: Тиск на НАБУ і САП  або  Новий Epic: Реформа ДБР"
+
+  # ── ДЕТАЛІ ───────────────────────────────────────────────
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 📖 Контекст
+      description: Що сталося? Які обставини? Чому це важливо?
+      placeholder: |
+        Наприклад:
+        У липні 2025 року ДБР провело обшуки в детективів НАБУ без ухвал суду.
+        Троє детективів були затримані та, за їхніми словами, побиті під час затримання.
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 🔎 Джерело
+      description: Посилання на публікацію, офіційний документ або заяву. Без джерела тікет не буде прийнято.
+      placeholder: |
+        - https://cpk.org.ua/...
+        - Заява керівника НАБУ від 15.07.2025
+        - Засідання антикорупційного комітету ВР, протокол №...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: >
+        Як зрозуміти, що тікет виконано? Опиши конкретний результат.
+      placeholder: |
+        - Службове розслідування зареєстроване та ведеться
+        - Витребувані докази та допити потерпілих проведені
+        - Відповідальні особи ідентифіковані
+    validations:
+      required: true
+
+  # ── МЕТАДАНІ ─────────────────────────────────────────────
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🔥 Пріоритет
+      options:
+        - Highest
+        - High
+        - Medium
+        - Low
+      default: 1
+    validations:
+      required: true
+
+  - type: input
+    id: labels
+    attributes:
+      label: 🏷 Мітки (Labels)
+      description: Через кому. Використовуй існуючі або додай нові.
+      placeholder: "Наприклад: DBR, Shabunin, NAKU_SAP"
+
+  - type: input
+    id: assignee
+    attributes:
+      label: 👤 Відповідальний (Assignee)
+      description: Email або GitHub username. Залиш порожнім якщо не знаєш.
+      placeholder: "user@example.com або @username"
+
+  # ── ФІНАЛ ────────────────────────────────────────────────
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ☑️ Перед відправкою перевір
+      options:
+        - label: Summary конкретний і не перевищує 200 символів
+          required: true
+        - label: Вказано хоча б одне джерело
+          required: true
+        - label: Є хоча б один Acceptance Criterion
+          required: true
+        - label: Я перевірив(ла), що такого тікету ще немає в репо
+          required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 💬 Додаткові нотатки
+      description: Будь-що, що не вмістилося вище. Необов'язково.
