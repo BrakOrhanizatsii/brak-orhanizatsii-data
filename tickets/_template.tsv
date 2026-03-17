@@ -1,0 +1,3 @@
+Work type	Summary	Work item ID	Parent	Description	Priority	Labels	Assignee
+Epic	Назва теми (Epic)	1		Короткий опис теми	High	label1	
+Story	[Дія] + [Об'єкт]	2	1	* Контекст: що сталося і чому важливо\n* Джерело: посилання або назва документа\n* Acceptance Criteria: що має статися щоб тікет вважався виконаним	High	label1	
